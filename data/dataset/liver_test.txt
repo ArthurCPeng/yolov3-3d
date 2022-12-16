@@ -1,0 +1,2 @@
+path1 y1,x1,z1,y2,x2,z2,class y1,x1,z1,y2,x2,z2,class
+path2 y1,x1,z1,y2,x2,z2,class y1,x1,z1,y2,x2,z2,class
