@@ -284,8 +284,8 @@ class Dataset(tf.keras.utils.Sequence):
         boxes1 = np.array(boxes1)
         boxes2 = np.array(boxes2)
 
-        boxes1_area = boxes1[..., 3] * boxes1[..., 4] #x, y, z, w, h, d
-        boxes2_area = boxes2[..., 3] * boxes2[..., 4] #x, y, z, w, h, d
+        boxes1_area = boxes1[..., 3] * boxes1[..., 4] * boxes1[..., 5] #x, y, z, w, h, d
+        boxes2_area = boxes2[..., 3] * boxes2[..., 4] * boxes2[..., 5]#x, y, z, w, h, d
 
         boxes1 = np.concatenate([boxes1[..., :3] - boxes1[..., 3:] * 0.5,
                                 boxes1[..., :3] + boxes1[..., 3:] * 0.5], axis=-1)
@@ -296,7 +296,7 @@ class Dataset(tf.keras.utils.Sequence):
         right_down = np.minimum(boxes1[..., 3:], boxes2[..., 3:])
 
         inter_section = np.maximum(right_down - left_up, 0.0)
-        inter_area = inter_section[..., 0] * inter_section[..., 1]
+        inter_area = inter_section[..., 0] * inter_section[..., 1] * inter_section[..., 2]
         union_area = boxes1_area + boxes2_area - inter_area
 
         return inter_area / (union_area + 1e-6)
